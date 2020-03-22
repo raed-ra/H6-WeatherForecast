@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/3da1a747b2.js" crossorigin="anonymous"></script>
+    <title>Daily planner</title>
+    <style>
+      .bg-RP {
+          background-color:#007cae;     
+         }
+  </style>
+</head>
+<body>
+
+<!--Navbar Start-->
+<nav class="container-fluid bg-RP">
+  <div class="navbar container mb-3 navbar-expand-lg navbar-dark bg-RP"> 
+      <a class="navbar-brand" href="index.html">RIPortfolios</a>  
+      <button 
+          class="navbar-toggler" 
+          type="button" 
+          data-toggle="collapse" 
+          data-target="#navbarSupportedContent" 
+          aria-controls="navbarSupportedContent" 
+          aria-expanded="false" 
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      
+          <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+      
+          <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+          <a class="nav-link" href="#front-end">FrontEnd Projects <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" href="#back-end">BackEnd Projects</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="Login.html">Login</a>
+          </li>
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" 
+              href="#" 
+              id="navbarDropdown" 
+              role="button" 
+              data-toggle="dropdown" 
+              aria-haspopup="true" 
+              aria-expanded="false">
+              Lets Connect
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="ContactUs.html">Contact us</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="about.html">About</a>
+          </div>
+          </li>
+      </ul>
+      </div>
+    </div>
+  </nav> 
+<!--Navbar end-->
+<main id="planner" class="container mt-5">  
+<!--Side left Navbar Start-->
+    <div class="row">
+        <nav  class="col-12 col-md-3" id="time&date">      
+            <!-- Start - clock on the side bar -->
+            <p class="title">Library used: Time w/Moment.js</p>
+            <div id="date"></div>
+            <div id="clock"></div>
+            <div class="my-5" id="calendar-container">
+                <div id="calendar-header">
+                    <span id="calendar-month-year"></span>
+                </div>
+                    <div id="calendar-dates"></div>
+            </div>
+            <p class="">1. Activities/tasks saved before current time will be grayed out.</p>
+            <p class="">2. If its already next day, tasks will be deleted and input boxes will have no entry.</p>
+            <p class="">3. If no task is typed and input box is left empty, the action button will not perform any operation.</p>
+        </nav>
+<!--Side left Navbar End-->
+
+
+        <div class="col-12 col-md-9"> <!--Planner Header start-->
+            <header class="jumbotron" style="padding:10%; background-color:rgba(143, 178, 201, 0.8)"> 
+                    <h1 class="display-5" style="height:20px ">Daily Activity Planner</h1> 
+            </header> <!--Planner Header end-->
+
+
+        <!-- Event planner Main -->
+
+            
+            <div class="input-group input-group-lg">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-lg">08:00 am</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="hour-index-8"  placeholder="Enter Task">
+                <button class="btn btn-outline-secondary dropdown-toggle alert-warning" id="btn-index-8" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
+                <div class="dropdown-menu" id="08">
+                    <option class="dropdown-item" id="action-s-08" href="#" value="1">Save</option>
+                    <option class="dropdown-item" id="action-d-08" href="#" value="2">Done</option>
+                    <option class="dropdown-item" id="action-nd-08" href="#" value="3">Not Done</option>
+                </div>
+            </div>
+
+            <br/>
+            
+            <div class="input-group input-group-lg">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-lg">09:00 am</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="hour-index-9"  placeholder="Enter Task">
+                <button class="btn btn-outline-secondary dropdown-toggle alert-warning" id="btn-index-9" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
+                <div class="dropdown-menu" id="09">
+                    <option class="dropdown-item" id="action-s-09" href="#" value="1">Save</option>
+                    <option class="dropdown-item" id="action-d-09" href="#" value="2">Done</option>
+                    <option class="dropdown-item" id="action-nd-09" href="#" value="3">Not Done</option>
+                </div>
+            </div>
+
+            <br/>
+
+            <div class="input-group input-group-lg">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-lg">10:00 am</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="hour-index-10" placeholder="Enter Task">
+                <button class="btn btn-outline-secondary dropdown-toggle alert-warning" id="btn-index-10" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
+                <div class="dropdown-menu" id="10">
+                    <option class="dropdown-item" id="action-s-10" href="#" value="1">Save</option>
+                    <option class="dropdown-item" id="action-d-10" href="#" value="2">Done</option>
+                    <option class="dropdown-item" id="action-nd-10" href="#" value="3">Not Done</option>
+                </div>
+            </div>    
+            
+            <br/>
+            
+            <div class="input-group input-group-lg">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-lg">11:00 am</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="hour-index-11"  placeholder="Enter Task">
+                <button class="btn btn-outline-secondary dropdown-toggle alert-warning" id="btn-index-11" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
+                <div class="dropdown-menu" id="11">
+                    <option class="dropdown-item" id="action-s-11" href="#" value="1">Save</option>
+                    <option class="dropdown-item" id="action-d-11" href="#" value="2">Done</option>
+                    <option class="dropdown-item" id="action-nd-11" href="#" value="3">Not Done</option>
+                </div>
+            </div>  
+
+            <br/>
+            
+            <div class="input-group input-group-lg">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-lg">12:00 pm</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="hour-index-12"  placeholder="Enter Task">
+                <button class="btn btn-outline-secondary dropdown-toggle alert-warning" id="btn-index-12" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
+                <div class="dropdown-menu" id="12">
+                    <option class="dropdown-item" id="action-s-12" href="#" value="1">Save</option>
+                    <option class="dropdown-item" id="action-d-12" href="#" value="2">Done</option>
+                    <option class="dropdown-item" id="action-nd-12" href="#" value="3">Not Done</option>
+                </div>
+            </div>
+
+            <br/>
+
+            <div class="input-group input-group-lg">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-lg">01:00 pm</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="hour-index-13"  placeholder="Enter Task">
+                <button class="btn btn-outline-secondary dropdown-toggle alert-warning" id="btn-index-13" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
+                <div class="dropdown-menu" id="13">
+                    <option class="dropdown-item" id="action-s-13" href="#" value="1">Save</option>
+                    <option class="dropdown-item" id="action-d-13" href="#" value="2">Done</option>
+                    <option class="dropdown-item" id="action-nd-13" href="#" value="3">Not Done</option>
+                </div>
+            </div>
+
+            <br/>
+
+            <div class="input-group input-group-lg">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-lg">02:00 pm</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"  id="hour-index-14"  placeholder="Enter Task">
+                <button class="btn btn-outline-secondary dropdown-toggle alert-warning" id="btn-index-14" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
+                <div class="dropdown-menu" id="14">
+                    <option class="dropdown-item" id="action-s-14" href="#" value="1">Save</option>
+                    <option class="dropdown-item" id="action-d-14" href="#" value="2">Done</option>
+                    <option class="dropdown-item" id="action-nd-14" href="#" value="3">Not Done</option>
+                </div>
+            </div>
+
+            <br/>
+
+            <div class="input-group input-group-lg">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-lg">03:00 pm</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"  id="hour-index-15"  placeholder="Enter Task">
+                <button class="btn btn-outline-secondary dropdown-toggle alert-warning" id="btn-index-15" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
+                <div class="dropdown-menu" id="15">
+                    <option class="dropdown-item" id="action-s-15" href="#" value="1">Save</option>
+                    <option class="dropdown-item" id="action-d-15" href="#" value="2">Done</option>
+                    <option class="dropdown-item" id="action-nd-15" href="#" value="3">Not Done</option>
+                </div>
+            </div>
+
+            <br/>
+            
+            <div class="input-group input-group-lg">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-lg">04:00 pm</span>
+                </div>
+                <input type="text" class="form-control alret-warning" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"  id="hour-index-16" placeholder="Enter Task">
+                <button class="btn btn-outline-secondary dropdown-toggle alert-warning" id="btn-index-16" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
+                <div class="dropdown-menu" id="16">
+                    <option class="dropdown-item" id="action-s-16" href="#" value="1">Save</option>
+                    <option class="dropdown-item" id="action-d-16" href="#" value="2">Done</option>
+                    <option class="dropdown-item" id="action-nd-16" href="#" value="3">Not Done</option>
+                </div>
+            </div>
+ 
+        <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
+        <script type="text/javascript">            
+            function updateTime() {
+                const now = moment();
+                const humanReadable = now.format("hh:mm:ssa");
+                $('#clock').text(humanReadable);
+            };
+            setInterval(updateTime,1000);
+        
+        // end - clock on the side bar 
+        
+        window.onload = function(){
+        //$(document).ready(function() { 
+            var d = moment();
+            var date = d.format("MMMM Do YYYY");
+            var month_name = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+            var month = d.month();   //0-11
+            var year = d.year(); //2020
+            var first_date = month_name[month] + " " + 1 + " " + year;
+            //September 1 2014
+            var todayDate = d.format("ddd MMM DD YYYY");
+            //console.log(todayDate);
+
+            //Mon Sep 01 2014 ...
+            var first_day = todayDate.substring(0, 3);    //Mon
+            //console.log(first_day)
+            var day_name = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+            var day_no = day_name.indexOf(first_day);   //gives the index of current day in the array 
+            var days = d.daysInMonth();    //number of days in the current month i.e. 30
+            var todayOfmonth = d.format("DD");
+            var firstdayOfmonth = day_name.indexOf(d.startOf("month").format("ddd"))
+            let dayOfmonth = null
+            dayOfmonth = JSON.parse(localStorage.getItem("plannerDate"));
+                if (dayOfmonth==null) {
+                    dayOfmonth = todayOfmonth;
+                }
+            var calendar = get_calendar(firstdayOfmonth, days, todayOfmonth, dayOfmonth);
+            let storedPlans = new Array(9).fill(null)
+            let actionRegister = new Array(9).fill(null)
+            console.log(days)
+            let actionRegisterObj = new Array(days).fill(Array(9).fill(null))
+            let storedPlansObj = new Array(days).fill(Array(9).fill(null))
+            console.log(storedPlansObj) //added
+            console.log(actionRegisterObj) //added
+            $('#calendar-month-year').text(month_name[month]+" "+year);
+            $('#calendar-dates').append(calendar);
+            $('#date').append(date);
+            // Navbar End
+
+                // get times from moment
+                const now = moment().format('MMMM Do YYYY')
+                let nowHour24 = moment().format('H');
+                let nowHour12 = moment().format('h');
+
+                // Get stored todos from localStorage
+                // Parsing the JSON string to an object
+                
+                console.log( JSON.parse(localStorage.getItem("storedPlansObj"))!=null && JSON.parse(localStorage.getItem("storedActiviesObj"))!=null)
+                
+                if (JSON.parse(localStorage.getItem("storedPlansObj"))!=null && JSON.parse(localStorage.getItem("storedActiviesObj"))!=null) { 
+                    console.log(dayOfmonth)
+                    storedPlansObj = JSON.parse(localStorage.getItem("storedPlansObj")); //added
+                    console.log(storedPlansObj) //added
+                    storedPlans = storedPlansObj[dayOfmonth] //added
+                    actionRegisterObj = JSON.parse(localStorage.getItem("storedActiviesObj")); //added
+                    actionRegister = actionRegisterObj[dayOfmonth]  //added
+                    console.log(actionRegisterObj) //added
+                    
+                    console.log(storedPlansObj[dayOfmonth]) //added
+                    console.log(actionRegisterObj[dayOfmonth]) //added
+                    
+                    console.log({actionRegister}) //added
+                    console.log({storedPlans}) //added
+
+                } else {
+                    // storedPlans[5] = "Recommended! Picnic lunch outside (lunch is important!)";
+                }
+                console.log({actionRegisterObj}) //added
+                console.log({storedPlansObj}) //added
+                console.log({actionRegister}) //added
+                console.log({storedPlans}) //added
+
+                // build calendar by row for fix set of hours
+                for (let hour = 8; hour <= 16; hour++) {
+                    // index for array use offset from hour
+                    let index = hour - 8;
+                    // clear existing elements
+                    $("#hour-index-" + hour).empty();
+                    // access index from data array for hour 
+                    $("#hour-index-" + hour).val(storedPlans[index]);
+                };
+                console.warn({actionRegister})
+                colorAction(actionRegister, dayOfmonth, todayOfmonth);///////////////////////////////////////////////////////////
+                // onclick function to listen for user clicks on plan area
+                $('.dropdown-menu option').on('click', update) 
+                
+                function update() {
+                    event.preventDefault();  
+                    let $index = $(this).attr('id').slice(-2);
+                    console.log(this)
+                    if (parseInt($index)<10) { 
+                        $index = $(this).attr('id').slice(-1);
+                    }
+                    let inputId = '#hour-index-'+$index;
+                    let actionText = $(inputId).val()
+                    let inputIdd = '#btn-index-'+$index;
+                    var opt = $(this)[0].value; //chooses between 1,2,3 depending on what action chosen
+                    var $index2 = parseInt($index)-8;
+
+                    if (actionText != "") { 
+                        storedPlans[$index2] = actionText;
+                        actionRegister[$index2] = opt;
+                    } 
+
+                    colorAction(actionRegister , dayOfmonth, todayOfmonth);
+
+                    console.log({storedPlans}) //added
+                    console.log({actionRegister}) //added
+                    console.log({dayOfmonth})
+                    actionRegisterObj[dayOfmonth]=actionRegister;//added
+                    storedPlansObj[dayOfmonth]=storedPlans; //added
+                    console.log(storedPlansObj)//added 
+                    console.log(actionRegisterObj)//added
+                    localStorage.setItem("storedPlansObj", JSON.stringify(storedPlansObj));//added
+                    localStorage.setItem("storedActiviesObj", JSON.stringify(actionRegisterObj));//added
+                    
+                    localStorage.setItem("plannerDate", JSON.stringify(dayOfmonth));
+                };  
+
+                $("td").click(function(event) {
+                event.preventDefault();
+                console.log($(this))
+                let dayOfmonth = parseInt($(this)[0].innerText)
+                console.warn(dayOfmonth);
+                localStorage.setItem("plannerDate", JSON.stringify(dayOfmonth));
+                window.location.reload();
+            }) 
+            };
+            function colorAction(actionStatus , dayOfmonth, todayOfmonth) {
+                
+                actionStatus.forEach(function(item,index) {
+                    let indexhour = index + 8
+                    let inputIdd = '#btn-index-'+ indexhour;
+                    let inputId = '#hour-index-'+ indexhour;
+
+                    if (item==="1") {
+                        $(inputIdd).removeClass("alert-warning alert-danger alert-primary alert-success");
+                        $(inputIdd).addClass("alert-primary");
+                        $(inputIdd).text("Saved")
+                        $(inputId).removeClass("alert-warning alert-danger alert-primary alert-success");
+                        $(inputId).addClass("alert-primary");
+                    } else if (item==="2") { 
+                        $(inputIdd).removeClass("alert-warning alert-danger alert-primary alert-success");
+                        $(inputIdd).addClass("alert-success");
+                        $(inputIdd).text("Done")
+                        $(inputId).removeClass("alert-warning alert-danger alert-primary alert-success");
+                        $(inputId).addClass("alert-success");
+                    } else if (item==="3") { 
+                        $(inputIdd).removeClass("alert-warning alert-danger alert-primary alert-success");
+                        $(inputIdd).addClass("alert-danger");
+                        $(inputIdd).text("To do")
+                        $(inputId).removeClass("alert-warning alert-danger alert-primary alert-success");
+                        $(inputId).addClass("alert-danger");
+                    }
+                    console.log(dayOfmonth)
+                    console.log(todayOfmonth)
+                    console.log(indexhour <  moment().format('H') && todayOfmonth == dayOfmonth)
+                    console.log(todayOfmonth > dayOfmonth )
+                    if ( (indexhour <  moment().format('H') && todayOfmonth == dayOfmonth) || (todayOfmonth > dayOfmonth )) {
+                            $(inputId).addClass("alert-dark")
+                            } 
+                });
+            }
+            //Build Calender Function
+            function get_calendar(day_no, days, todayOfmonth, dayOfmonth){
+            var table = $('<table>');
+            var tr = $('<tr>');
+            //Row for the day letters
+            for(var c=0; c<=6; c++){
+                var td = $("<td>");
+             
+                td.text("SMTWTFS"[c]);
+                tr.append(td);
+                //console.log(tr)
+            }
+            table.append(tr);
+            //console.log(table)
+            
+            //create 2nd row
+            tr = $('<tr>');
+            var c;
+            for(c=0; c<=6; c++){
+                if(c == day_no){
+                    break;
+                }
+                var td = $('<td>');
+                td.text("");
+                tr.append(td);
+            }
+            console.log(dayOfmonth)
+            console.log(todayOfmonth)
+        
+            var count = 1;
+            for(c=day_no; c<=6; c++){
+                var td = $('<td>');
+                td.text(count);
+                if (count==todayOfmonth){
+                    td.addClass("text-primary")
+                }
+                if (count==dayOfmonth){
+                        td.addClass("bg-warning rounded-circle")
+                } 
+                count++;
+                tr.append(td);
+            }
+            table.append(tr);
+            
+            //rest of the date rows
+            for(var r=3; r<=7; r++){
+                tr = $('<tr>');
+                for(var c=0; c<=6; c++){
+                    if(count > days){
+                        table.append(tr);
+                        return table;
+                    }
+                    td = $('<td>');
+                    td.text(count);
+                    if (count==todayOfmonth){
+                        td.addClass("text-primary")
+                    }
+                    if (count==dayOfmonth){
+                        td.addClass("bg-warning rounded-circle")
+                    }          
+                    count++;
+                    tr.append(td);
+                }
+                table.append(tr);
+            }
+            return table;
+         }
+          </script>
+        </main>
+    </div>
+</div>
+  <footer class="container-fluid mt-5 bg-RP text-dark">
+    <div class="container">
+        <div class="row mb-0 text-left py-5"> <!--Portfolio footer start-->
+            <div class="col py-5 px-0">
+            <h1 class="display-5">R-Innovative Protfolios</h1>
+
+            <ul class="list-group list-group-flush bg-RP text-dark">
+                <li class="list-group-item font-weight-bold bg-RP text-light">Raed</li>
+                <li class="list-group-item bg-RP text-light">Raed Fun Protfolios</li>
+            </ul>
+            </div>
+        </div>  <!--Portfolio footer end--> 
+    </div>
+  </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>  
+   
+    
+    
+</body>
+   
+</html>
