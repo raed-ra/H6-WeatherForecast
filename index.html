@@ -6,11 +6,30 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/3da1a747b2.js" crossorigin="anonymous"></script>
-    <title>Daily planner</title>
+    <title>Weather Forecast</title>
     <style>
       .bg-RP {
           background-color:#007cae;     
          }
+      .mt-4 {
+        margin-top: 20rem ;
+        }
+
+      .ml-1 {
+        margin-left: (1 * .25) ;
+        }
+
+      .px-2 {
+        padding-left: (1 * .5) ;
+        padding-right: (1 * .5) ;
+        }
+      .bg-yellow {
+          background-color:yellow;
+      }
+      .bg-violet {
+          background-color:violet;
+      }
+
   </style>
 </head>
 <body>
@@ -70,174 +89,115 @@
 <main id="planner" class="container mt-5">  
 <!--Side left Navbar Start-->
     <div class="row">
-        <nav  class="col-12 col-md-3" id="time&date">      
+        <nav  class="col-12 col-md-3 bg-light" id="time&date">      
             <!-- Start - clock on the side bar -->
-            <p class="title">Library used: Time w/Moment.js</p>
-            <div id="date"></div>
-            <div id="clock"></div>
+            
+            <p class="border border-light h-30 bg-light font-weight-bold ">Search for a city:</p>
+            
+            <div class="input-group mb-3">
+                <input type="text" class="form-control inputcity" placeholder="City" aria-label="City name" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary search" type="button">Search</button>
+                </div>
+            </div>
+
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action  active">
+                  Cras justo odio
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+                <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
+                <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
+                <a href="#" class="list-group-item list-group-item-action disabled">Vestibulum at eros</a>
+            </div>
+
+            <div class="border border-secondary h-30 rounded text-center mt-4 clock"></div>
+            <div class="border border-secondary h-30 rounded text-center date" id="date"></div>
             <div class="my-5" id="calendar-container">
                 <div id="calendar-header">
                     <span id="calendar-month-year"></span>
                 </div>
                     <div id="calendar-dates"></div>
-            </div>
-            <p class="">1. Activities/tasks saved before current time will be grayed out.</p>
-            <p class="">2. If its already next day, tasks will be deleted and input boxes will have no entry.</p>
-            <p class="">3. If no task is typed and input box is left empty, the action button will not perform any operation.</p>
+                </div>
+            <p class=""></p>
+            <p class=""></p>
+            <p class=""></p>
         </nav>
 <!--Side left Navbar End-->
 
 
         <div class="col-12 col-md-9"> <!--Planner Header start-->
-            <header class="jumbotron" style="padding:10%; background-color:rgba(143, 178, 201, 0.8)"> 
-                    <h1 class="display-5" style="height:20px ">Daily Activity Planner</h1> 
+            <div class="jumbotron">
+                <h1 class="display-2 cityname">city</h1>
+                <hr class="my-4">
+                <p class="temp">Temperature: <span class="tempno"></span</p>
+                <p class="humidity">Humidity: <span class="humidityno"></span</p>
+                <p class="Wind Speed">Wind Speed: <span class="windspeedno"></span</p>
+                <p class="UV Index">UV Index: <span class="uvindexno"></span></p>
+                <!-- <p class="lead">
+                  <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                </p> -->
+              </div>
             </header> <!--Planner Header end-->
 
+            
+           <div class="row forecast justify-content-around">
+            <!-- <div class="card bg-primary text-white" style="width: 9rem;">
+                <img class="card-img-top" src="..." alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Date</h5>
+                  <p class="temp">Temperature: <span class="fortempno">30</span</p>
+                  <p class="humidty">humidty: <span class="forhumidityno">80%</span</p>
+                
+                </div>
+              </div>
+              <div class="card" style="width: 9rem;">
+                <img class="card-img-top" src="..." alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Date</h5>
+                  <p class="temp">Temperature: <span class="fortempno">30</span</p>
+                  <p class="humidty">humidty: <span class="forhumidityno">80%</span</p>
+                  
+                </div>
+              </div>
+              <div class="card" style="width: 9rem;">
+                <img class="card-img-top" src="..." alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Date</h5>
+                  <p class="temp">Temperature: <span class="fortempno">30</span</p>
+                  <p class="humidty">humidty: <span class="forhumidityno">80%</span</p>
+                  
+                </div>
+              </div>
+              <div class="card" style="width: 9rem;">
+                <img class="card-img-top" src="..." alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Date</h5>
+                  <p class="temp">Temperature: <span class="fortempno">30</span</p>
+                  <p class="humidty">humidty: <span class="forhumidityno">80%</span</p>
+                  
+                </div>
+              </div>
+              <div class="card" style="width: 9rem;">
+                <img class="card-img-top" src="..." alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Date</h5>
+                  <p class="temp">Temperature: <span class="fortempno">30</span</p>
+                  <p class="humidty">humidty: <span class="forhumidityno">80%</span</p>
+                  
+                </div>
+              </div> -->
+           </div> 
+        </div>
 
         <!-- Event planner Main -->
 
             
-            <div class="input-group input-group-lg">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroup-sizing-lg">08:00 am</span>
-                </div>
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="hour-index-8"  placeholder="Enter Task">
-                <button class="btn btn-outline-secondary dropdown-toggle alert-warning" id="btn-index-8" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
-                <div class="dropdown-menu" id="08">
-                    <option class="dropdown-item" id="action-s-08" href="#" value="1">Save</option>
-                    <option class="dropdown-item" id="action-d-08" href="#" value="2">Done</option>
-                    <option class="dropdown-item" id="action-nd-08" href="#" value="3">Not Done</option>
-                </div>
-            </div>
 
-            <br/>
-            
-            <div class="input-group input-group-lg">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroup-sizing-lg">09:00 am</span>
-                </div>
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="hour-index-9"  placeholder="Enter Task">
-                <button class="btn btn-outline-secondary dropdown-toggle alert-warning" id="btn-index-9" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
-                <div class="dropdown-menu" id="09">
-                    <option class="dropdown-item" id="action-s-09" href="#" value="1">Save</option>
-                    <option class="dropdown-item" id="action-d-09" href="#" value="2">Done</option>
-                    <option class="dropdown-item" id="action-nd-09" href="#" value="3">Not Done</option>
-                </div>
-            </div>
 
-            <br/>
-
-            <div class="input-group input-group-lg">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroup-sizing-lg">10:00 am</span>
-                </div>
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="hour-index-10" placeholder="Enter Task">
-                <button class="btn btn-outline-secondary dropdown-toggle alert-warning" id="btn-index-10" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
-                <div class="dropdown-menu" id="10">
-                    <option class="dropdown-item" id="action-s-10" href="#" value="1">Save</option>
-                    <option class="dropdown-item" id="action-d-10" href="#" value="2">Done</option>
-                    <option class="dropdown-item" id="action-nd-10" href="#" value="3">Not Done</option>
-                </div>
-            </div>    
-            
-            <br/>
-            
-            <div class="input-group input-group-lg">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroup-sizing-lg">11:00 am</span>
-                </div>
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="hour-index-11"  placeholder="Enter Task">
-                <button class="btn btn-outline-secondary dropdown-toggle alert-warning" id="btn-index-11" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
-                <div class="dropdown-menu" id="11">
-                    <option class="dropdown-item" id="action-s-11" href="#" value="1">Save</option>
-                    <option class="dropdown-item" id="action-d-11" href="#" value="2">Done</option>
-                    <option class="dropdown-item" id="action-nd-11" href="#" value="3">Not Done</option>
-                </div>
-            </div>  
-
-            <br/>
-            
-            <div class="input-group input-group-lg">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroup-sizing-lg">12:00 pm</span>
-                </div>
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="hour-index-12"  placeholder="Enter Task">
-                <button class="btn btn-outline-secondary dropdown-toggle alert-warning" id="btn-index-12" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
-                <div class="dropdown-menu" id="12">
-                    <option class="dropdown-item" id="action-s-12" href="#" value="1">Save</option>
-                    <option class="dropdown-item" id="action-d-12" href="#" value="2">Done</option>
-                    <option class="dropdown-item" id="action-nd-12" href="#" value="3">Not Done</option>
-                </div>
-            </div>
-
-            <br/>
-
-            <div class="input-group input-group-lg">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroup-sizing-lg">01:00 pm</span>
-                </div>
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="hour-index-13"  placeholder="Enter Task">
-                <button class="btn btn-outline-secondary dropdown-toggle alert-warning" id="btn-index-13" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
-                <div class="dropdown-menu" id="13">
-                    <option class="dropdown-item" id="action-s-13" href="#" value="1">Save</option>
-                    <option class="dropdown-item" id="action-d-13" href="#" value="2">Done</option>
-                    <option class="dropdown-item" id="action-nd-13" href="#" value="3">Not Done</option>
-                </div>
-            </div>
-
-            <br/>
-
-            <div class="input-group input-group-lg">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroup-sizing-lg">02:00 pm</span>
-                </div>
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"  id="hour-index-14"  placeholder="Enter Task">
-                <button class="btn btn-outline-secondary dropdown-toggle alert-warning" id="btn-index-14" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
-                <div class="dropdown-menu" id="14">
-                    <option class="dropdown-item" id="action-s-14" href="#" value="1">Save</option>
-                    <option class="dropdown-item" id="action-d-14" href="#" value="2">Done</option>
-                    <option class="dropdown-item" id="action-nd-14" href="#" value="3">Not Done</option>
-                </div>
-            </div>
-
-            <br/>
-
-            <div class="input-group input-group-lg">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroup-sizing-lg">03:00 pm</span>
-                </div>
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"  id="hour-index-15"  placeholder="Enter Task">
-                <button class="btn btn-outline-secondary dropdown-toggle alert-warning" id="btn-index-15" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
-                <div class="dropdown-menu" id="15">
-                    <option class="dropdown-item" id="action-s-15" href="#" value="1">Save</option>
-                    <option class="dropdown-item" id="action-d-15" href="#" value="2">Done</option>
-                    <option class="dropdown-item" id="action-nd-15" href="#" value="3">Not Done</option>
-                </div>
-            </div>
-
-            <br/>
-            
-            <div class="input-group input-group-lg">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroup-sizing-lg">04:00 pm</span>
-                </div>
-                <input type="text" class="form-control alret-warning" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"  id="hour-index-16" placeholder="Enter Task">
-                <button class="btn btn-outline-secondary dropdown-toggle alert-warning" id="btn-index-16" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
-                <div class="dropdown-menu" id="16">
-                    <option class="dropdown-item" id="action-s-16" href="#" value="1">Save</option>
-                    <option class="dropdown-item" id="action-d-16" href="#" value="2">Done</option>
-                    <option class="dropdown-item" id="action-nd-16" href="#" value="3">Not Done</option>
-                </div>
-            </div>
- 
-        <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
+       
         <script type="text/javascript">            
-            function updateTime() {
-                const now = moment();
-                const humanReadable = now.format("hh:mm:ssa");
-                $('#clock').text(humanReadable);
-            };
-            setInterval(updateTime,1000);
+         var coordMatrix = [];  
         
         // end - clock on the side bar 
         
@@ -272,137 +232,205 @@
             console.log(days)
             let actionRegisterObj = new Array(days).fill(Array(9).fill(null))
             let storedPlansObj = new Array(days).fill(Array(9).fill(null))
-            console.log(storedPlansObj) //added
-            console.log(actionRegisterObj) //added
+
             $('#calendar-month-year').text(month_name[month]+" "+year);
             $('#calendar-dates').append(calendar);
-            $('#date').append(date);
+            $('.date').append(date);
             // Navbar End
+
+            var queryURL;
+            var weatherObj;
+            var city;
+            var temp;
+            var humidity;
+            var unindex;
+            var windspeed;
+            var cities = [];
+            var weatherimagecode;
+            
+
+            $('.search').on('click', function(event) { 
+                console.log("yes")
+                event.preventDefault();
+                var input = $(".inputcity").val().trim()
+                console.log(input)
+                cities.push(input)
+                // Here we are building the URL we need to query the database
+                //weatherQuery(input,cities,todayDate)
+                weatherforecastQuery(input,cities,todayDate)
+
+                
+            })
 
                 // get times from moment
                 const now = moment().format('MMMM Do YYYY')
                 let nowHour24 = moment().format('H');
                 let nowHour12 = moment().format('h');
-
-                // Get stored todos from localStorage
-                // Parsing the JSON string to an object
-                
-                console.log( JSON.parse(localStorage.getItem("storedPlansObj"))!=null && JSON.parse(localStorage.getItem("storedActiviesObj"))!=null)
-                
-                if (JSON.parse(localStorage.getItem("storedPlansObj"))!=null && JSON.parse(localStorage.getItem("storedActiviesObj"))!=null) { 
-                    console.log(dayOfmonth)
-                    storedPlansObj = JSON.parse(localStorage.getItem("storedPlansObj")); //added
-                    console.log(storedPlansObj) //added
-                    storedPlans = storedPlansObj[dayOfmonth] //added
-                    actionRegisterObj = JSON.parse(localStorage.getItem("storedActiviesObj")); //added
-                    actionRegister = actionRegisterObj[dayOfmonth]  //added
-                    console.log(actionRegisterObj) //added
-                    
-                    console.log(storedPlansObj[dayOfmonth]) //added
-                    console.log(actionRegisterObj[dayOfmonth]) //added
-                    
-                    console.log({actionRegister}) //added
-                    console.log({storedPlans}) //added
-
-                } else {
-                    // storedPlans[5] = "Recommended! Picnic lunch outside (lunch is important!)";
-                }
-                console.log({actionRegisterObj}) //added
-                console.log({storedPlansObj}) //added
-                console.log({actionRegister}) //added
-                console.log({storedPlans}) //added
-
-                // build calendar by row for fix set of hours
-                for (let hour = 8; hour <= 16; hour++) {
-                    // index for array use offset from hour
-                    let index = hour - 8;
-                    // clear existing elements
-                    $("#hour-index-" + hour).empty();
-                    // access index from data array for hour 
-                    $("#hour-index-" + hour).val(storedPlans[index]);
-                };
-                console.warn({actionRegister})
-                colorAction(actionRegister, dayOfmonth, todayOfmonth);///////////////////////////////////////////////////////////
-                // onclick function to listen for user clicks on plan area
-                $('.dropdown-menu option').on('click', update) 
-                
-                function update() {
-                    event.preventDefault();  
-                    let $index = $(this).attr('id').slice(-2);
-                    console.log(this)
-                    if (parseInt($index)<10) { 
-                        $index = $(this).attr('id').slice(-1);
-                    }
-                    let inputId = '#hour-index-'+$index;
-                    let actionText = $(inputId).val()
-                    let inputIdd = '#btn-index-'+$index;
-                    var opt = $(this)[0].value; //chooses between 1,2,3 depending on what action chosen
-                    var $index2 = parseInt($index)-8;
-
-                    if (actionText != "") { 
-                        storedPlans[$index2] = actionText;
-                        actionRegister[$index2] = opt;
-                    } 
-
-                    colorAction(actionRegister , dayOfmonth, todayOfmonth);
-
-                    console.log({storedPlans}) //added
-                    console.log({actionRegister}) //added
-                    console.log({dayOfmonth})
-                    actionRegisterObj[dayOfmonth]=actionRegister;//added
-                    storedPlansObj[dayOfmonth]=storedPlans; //added
-                    console.log(storedPlansObj)//added 
-                    console.log(actionRegisterObj)//added
-                    localStorage.setItem("storedPlansObj", JSON.stringify(storedPlansObj));//added
-                    localStorage.setItem("storedActiviesObj", JSON.stringify(actionRegisterObj));//added
-                    
-                    localStorage.setItem("plannerDate", JSON.stringify(dayOfmonth));
-                };  
-
-                $("td").click(function(event) {
-                event.preventDefault();
-                console.log($(this))
-                let dayOfmonth = parseInt($(this)[0].innerText)
-                console.warn(dayOfmonth);
-                localStorage.setItem("plannerDate", JSON.stringify(dayOfmonth));
-                window.location.reload();
-            }) 
             };
-            function colorAction(actionStatus , dayOfmonth, todayOfmonth) {
-                
-                actionStatus.forEach(function(item,index) {
-                    let indexhour = index + 8
-                    let inputIdd = '#btn-index-'+ indexhour;
-                    let inputId = '#hour-index-'+ indexhour;
 
-                    if (item==="1") {
-                        $(inputIdd).removeClass("alert-warning alert-danger alert-primary alert-success");
-                        $(inputIdd).addClass("alert-primary");
-                        $(inputIdd).text("Saved")
-                        $(inputId).removeClass("alert-warning alert-danger alert-primary alert-success");
-                        $(inputId).addClass("alert-primary");
-                    } else if (item==="2") { 
-                        $(inputIdd).removeClass("alert-warning alert-danger alert-primary alert-success");
-                        $(inputIdd).addClass("alert-success");
-                        $(inputIdd).text("Done")
-                        $(inputId).removeClass("alert-warning alert-danger alert-primary alert-success");
-                        $(inputId).addClass("alert-success");
-                    } else if (item==="3") { 
-                        $(inputIdd).removeClass("alert-warning alert-danger alert-primary alert-success");
-                        $(inputIdd).addClass("alert-danger");
-                        $(inputIdd).text("To do")
-                        $(inputId).removeClass("alert-warning alert-danger alert-primary alert-success");
-                        $(inputId).addClass("alert-danger");
-                    }
-                    console.log(dayOfmonth)
-                    console.log(todayOfmonth)
-                    console.log(indexhour <  moment().format('H') && todayOfmonth == dayOfmonth)
-                    console.log(todayOfmonth > dayOfmonth )
-                    if ( (indexhour <  moment().format('H') && todayOfmonth == dayOfmonth) || (todayOfmonth > dayOfmonth )) {
-                            $(inputId).addClass("alert-dark")
-                            } 
+            
+            function updateTime() {
+                const now = moment();
+                const humanReadable = now.format("hh:mm:ssa");
+                $('.clock').text(humanReadable);
+            };
+            setInterval(updateTime,1000);
+
+
+            function weatherQuery(city,cities,todayDate) { 
+            var APIKey = "a07df414557c7b11b6dc89a1457fd71b";
+            var cityCoord = {};
+            queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + APIKey;
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+                })
+                // We store all of the retrieved data inside of an object called "response"
+                .then(function(response) {
+
+                    // Log the queryURL
+                    console.log(queryURL);
+
+                    // Log the resulting object
+                    cities.push(response.name)
+                    console.log(cityCoord)
+                    coordMatrix = [response.coord.lat,response.coord.lon]
+                    city = response.name
+                    weatherimagecode = response.weather[0].icon
+                    cityCoord[city] = coordMatrix;
+                    var imglink = "http://openweathermap.org/img/wn/" + weatherimagecode + "@2x.png" 
+                    var img = $("<img>");
+                    img.attr("src",imglink)
+                    console.log(img)
+                    // Transfer content to HTML
+                    $(".cityname").html(response.name + " (" + todayDate + ")");
+                    $(".cityname").append(img)
+                    $(".windspeedno").text(response.wind.speed);
+                    $(".humidityno").text(response.main.humidity);
+                    $(".tempno").text(response.main.temp);
+                    //uvQuery(coordMatrix);
                 });
-            }
+            };
+
+            function uvQuery(coord) { 
+            var APIKey = "a07df414557c7b11b6dc89a1457fd71b";
+            console.log(coord)
+            queryURL = "https://api.openweathermap.org/data/2.5/uvi?lat=" + coord[0] + "&lon=" + coord[1] + "&appid=" + APIKey;
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+                })
+                // We store all of the retrieved data inside of an object called "response"
+                .then(function(response) {
+                    // Log the queryURL
+                    console.log(queryURL);
+                    // Log the resulting object
+                    console.log(response);
+                    // Transfer content to HTML
+                    $(".uvindexno").text(response.value);
+                    var uvindex = 8.23;
+                    console.log(response.value < 3)
+                    console.log(3 << response.value << 6)
+                    console.log(6 < response.value < 8)
+                    console.log(8 < response.value < 11)
+
+                    if (response.value < 3) {
+                        $(".uvindexno").removeClass("bg-warning bg-danger bg-success bg-violet bg-yellow")
+                        $(".uvindexno").addClass("bg-success")
+                    } else if ( 3 <= response.value && response.value < 6) {
+                        $(".uvindexno").removeClass("bg-warning bg-danger bg-success bg-violet bg-yellow")
+                        $(".uvindexno").addClass("bg-yellow")
+                    } else if (6 <= response.value && response.value < 8) {
+                        $(".uvindexno").removeClass("bg-warning bg-danger bg-success bg-violet bg-yellow")
+                        $(".uvindexno").addClass("bg-warning")
+                    } else if (8 <= response.value && response.value < 11 ) {
+                        $(".uvindexno").removeClass("bg-warning bg-danger bg-success bg-violet bg-yellow")
+                        $(".uvindexno").addClass("bg-danger")
+                    } else {
+                        $(".uvindexno").removeClass("bg-warning bg-danger bg-success bg-violet bg-yellow")
+                        $(".uvindexno").addClass("bg-violet") 
+                    }
+                });
+            };
+
+            function weatherforecastQuery(city,cities,todayDate) { 
+                var APIKey = "a07df414557c7b11b6dc89a1457fd71b";
+                var cityCoord = {};
+                queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey;
+                $.ajax({
+                    url: queryURL,
+                    method: "GET"
+                    })
+                    // We store all of the retrieved data inside of an object called "response"
+                    .then(function(response) {
+
+                        var weatherimagecode = [] 
+                        var humidity = []
+                        var temp = []
+                        console.log(response)
+                        for (var i = 0; i < 5; i++) {
+                            temp[i]= 273.15 - (response.list[i].main.temp)
+                            console.log(temp[i])
+                            humidity[i]= 273.15 - (response.list[i].main.humidtiy)
+                            console.log(humidity[i])
+                            weatherimagecode[i] =response.list[i].weather[0].icon
+                            console.log(weatherimagecode[i])
+                            }
+                            console.log(temp[i])
+                            humidity[i]= 273.15 - (response.list[i].main.humidtiy)
+                            console.log(humidity[i])
+                            weatherimagecode[i] =response.list[i].weather[0].icon
+                            console.log(weatherimagecode[i])
+                        // Log the queryURL
+                        console.log(queryURL);
+                    
+                        
+                        // Log the resulting object
+                        var imglink = "http://openweathermap.org/img/wn/" + weatherimagecode + "@2x.png" 
+
+
+                });
+            };
+
+            
+            // for (var i = 0; i < 5; i++) {
+            //     var div1 = $("<div>");
+            //     var div2 = $("<div>");
+            //     var span1 =$("<span>");
+            //     var p1 = $("<p>");
+            //     var span2 =$("<span>");
+            //     var p2 = $("<p>");
+            //     var img = $("<img>");
+            //     var h5 = $("<h5>");
+            //     
+            //     var imglink = "http://openweathermap.org/img/wn/" + imagecode[i] + "@2x.png"
+
+            //     span2.addClass("forhumidityno");
+            //     p2.addClass("humidity");
+            //     span1.addClass("fortempno");
+            //     p1.addClass("temp");
+            //     h5.addClass("card-title");
+            //     div2.addClass("card-body");
+            //     img.addClass("card-img-top");
+            //     div1.addclass("car bg-primary text-white");
+
+            //     img.attr("src", imglink)
+            //     img.attr("alt" , "weather image cap")
+            //     div1.style("width: 9rem")
+
+            //     span2.text(humidity[i]);
+            //     span1.text(temp[i]);
+            //     span1.text(todayDate.add(i , "day"));
+                
+            //     p2.append(span2)
+            //     p1.append(span1)
+            //     div2.append(h5).append(p1).append(p2)
+            //     div1.append(img).append(div2)
+
+            //     $(".forecast").append(div1)
+                
+            // }
+
             //Build Calender Function
             function get_calendar(day_no, days, todayOfmonth, dayOfmonth){
             var table = $('<table>');
@@ -429,8 +457,6 @@
                 td.text("");
                 tr.append(td);
             }
-            console.log(dayOfmonth)
-            console.log(todayOfmonth)
         
             var count = 1;
             for(c=day_no; c<=6; c++){
@@ -488,11 +514,12 @@
         </div>  <!--Portfolio footer end--> 
     </div>
   </footer>
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>  
-   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>  
     
     
 </body>
