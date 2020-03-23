@@ -256,7 +256,7 @@
                 console.log(input)
                 cities.push(input)
                 // Here we are building the URL we need to query the database
-                //weatherQuery(input,cities,todayDate)
+                weatherQuery(input,cities,todayDate)
                 weatherforecastQuery(input,cities,todayDate)
 
                 
@@ -308,7 +308,7 @@
                     $(".windspeedno").text(response.wind.speed);
                     $(".humidityno").text(response.main.humidity);
                     $(".tempno").text(response.main.temp);
-                    //uvQuery(coordMatrix);
+                    uvQuery(coordMatrix);
                 });
             };
 
@@ -369,67 +369,73 @@
                         var temp = []
                         console.log(response)
                         for (var i = 0; i < 5; i++) {
-                            temp[i]= 273.15 - (response.list[i].main.temp)
+                            var p = i + 8;
+                            temp[i]=  ((response.list[p].main.temp) - 273.15).toFixed(2)
                             console.log(temp[i])
-                            humidity[i]= 273.15 - (response.list[i].main.humidtiy)
+                            humidity[i]= response.list[p].main.humidity
                             console.log(humidity[i])
-                            weatherimagecode[i] =response.list[i].weather[0].icon
+                            weatherimagecode[i] =response.list[p].weather[0].icon
                             console.log(weatherimagecode[i])
                             }
-                            console.log(temp[i])
-                            humidity[i]= 273.15 - (response.list[i].main.humidtiy)
-                            console.log(humidity[i])
-                            weatherimagecode[i] =response.list[i].weather[0].icon
-                            console.log(weatherimagecode[i])
+                            
+                        console.log(temp)
+                        console.log(humidity)
+                        console.log(weatherimagecode)
+                        updateForecast(temp,humidity,weatherimagecode)
                         // Log the queryURL
-                        console.log(queryURL);
-                    
                         
-                        // Log the resulting object
-                        var imglink = "http://openweathermap.org/img/wn/" + weatherimagecode + "@2x.png" 
-
-
                 });
             };
 
-            
-            // for (var i = 0; i < 5; i++) {
-            //     var div1 = $("<div>");
-            //     var div2 = $("<div>");
-            //     var span1 =$("<span>");
-            //     var p1 = $("<p>");
-            //     var span2 =$("<span>");
-            //     var p2 = $("<p>");
-            //     var img = $("<img>");
-            //     var h5 = $("<h5>");
-            //     
-            //     var imglink = "http://openweathermap.org/img/wn/" + imagecode[i] + "@2x.png"
-
-            //     span2.addClass("forhumidityno");
-            //     p2.addClass("humidity");
-            //     span1.addClass("fortempno");
-            //     p1.addClass("temp");
-            //     h5.addClass("card-title");
-            //     div2.addClass("card-body");
-            //     img.addClass("card-img-top");
-            //     div1.addclass("car bg-primary text-white");
-
-            //     img.attr("src", imglink)
-            //     img.attr("alt" , "weather image cap")
-            //     div1.style("width: 9rem")
-
-            //     span2.text(humidity[i]);
-            //     span1.text(temp[i]);
-            //     span1.text(todayDate.add(i , "day"));
+            function updateForecast (temp,humidity,imagecode) { 
                 
-            //     p2.append(span2)
-            //     p1.append(span1)
-            //     div2.append(h5).append(p1).append(p2)
-            //     div1.append(img).append(div2)
+                    console.log(temp)
+                    console.log(humidity)
+                    console.log(imagecode)
 
-            //     $(".forecast").append(div1)
-                
-            // }
+                for (var i = 0; i < 5; i++) {
+                    var div1 = $("<div>");
+                    var div2 = $("<div>");
+                    var span1 =$("<span>");
+                    var p1 = $("<p>");
+                    var span2 =$("<span>");
+                    var p2 = $("<p>");
+                    var img = $("<img>");
+                    var h5 = $("<h5>");
+                    
+                    var imglink = "http://openweathermap.org/img/wn/" + imagecode[i] + "@2x.png"
+                    
+                    
+                    span2.addClass("forhumidityno");
+                    p2.addClass("humidity");
+                    span1.addClass("fortempno");
+                    p1.addClass("temp");
+                    h5.addClass("card-title");
+                    div2.addClass("card-body");
+                    img.addClass("card-img-top");
+                    div1.addClass("card bg-primary text-white");
+
+                    img.attr("src", imglink)
+                    img.attr("alt" , "weather image cap")
+                    img.css({'width' : '3rem'})
+                   
+
+                    span2.text(humidity[i]);
+                    span1.text(temp[i]);
+                    var date = moment().add(i , "day")
+                    var dateformatted = date.format("LL")
+                    h5.text(dateformatted);
+                  
+                    p2.append(span2)
+                    p1.append(span1)
+                    div2.append(p1).append(p2)
+                    div1.append(h5).append(img).append(div2)
+                    div1.css({'width': '9rem'})
+
+                    $(".forecast").append(div1)
+                    
+                };
+            };
 
             //Build Calender Function
             function get_calendar(day_no, days, todayOfmonth, dayOfmonth){
