@@ -93,32 +93,28 @@
             <!-- Start - clock on the side bar -->
             
             <p class="border border-light h-30 bg-light font-weight-bold ">Search for a city:</p>
-            
+            <!-- slkjhsalhdslaD QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ-->
             <div class="input-group mb-3">
                 <input type="text" class="form-control inputcity" placeholder="City" aria-label="City name" aria-describedby="basic-addon2">
                 <div class="input-group-append">
                   <button class="btn btn-outline-secondary search" type="button">Search</button>
                 </div>
             </div>
-
-            <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action  active">
-                  Cras justo odio
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+                <!-- <a href="#" class="list-group-item list-group-item-action  active">Cras justo odio</a>
+                <a href="#" class="list-group-item list-group-item-action city">Dapibus ac facilisis in</a>
                 <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
                 <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
-                <a href="#" class="list-group-item list-group-item-action disabled">Vestibulum at eros</a>
-            </div>
+                <a href="#" class="list-group-item list-group-item-action disabled">Vestibulum at eros</a> -->
+            <div class="list-group citylist"></div>
 
             <div class="border border-secondary h-30 rounded text-center mt-4 clock"></div>
             <div class="border border-secondary h-30 rounded text-center date" id="date"></div>
-            <div class="my-5" id="calendar-container">
-                <div id="calendar-header">
-                    <span id="calendar-month-year"></span>
-                </div>
+            <!-- <div class="border border-secondary h-30 rounded text-center date" id="calendar-container">
+                    <div id="calendar-header">
+                        <span id="calendar-month-year"></span>
+                    </div>
                     <div id="calendar-dates"></div>
-                </div>
+            </div> -->
             <p class=""></p>
             <p class=""></p>
             <p class=""></p>
@@ -128,7 +124,7 @@
 
         <div class="col-12 col-md-9"> <!--Planner Header start-->
             <div class="jumbotron">
-                <h1 class="display-2 cityname">city</h1>
+                <h1 class="display-4 cityname">city</h1>
                 <hr class="my-4">
                 <p class="temp">Temperature: <span class="tempno"></span</p>
                 <p class="humidity">Humidity: <span class="humidityno"></span</p>
@@ -142,51 +138,7 @@
 
             
            <div class="row forecast justify-content-around">
-            <!-- <div class="card bg-primary text-white" style="width: 9rem;">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Date</h5>
-                  <p class="temp">Temperature: <span class="fortempno">30</span</p>
-                  <p class="humidty">humidty: <span class="forhumidityno">80%</span</p>
-                
-                </div>
-              </div>
-              <div class="card" style="width: 9rem;">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Date</h5>
-                  <p class="temp">Temperature: <span class="fortempno">30</span</p>
-                  <p class="humidty">humidty: <span class="forhumidityno">80%</span</p>
-                  
-                </div>
-              </div>
-              <div class="card" style="width: 9rem;">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Date</h5>
-                  <p class="temp">Temperature: <span class="fortempno">30</span</p>
-                  <p class="humidty">humidty: <span class="forhumidityno">80%</span</p>
-                  
-                </div>
-              </div>
-              <div class="card" style="width: 9rem;">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Date</h5>
-                  <p class="temp">Temperature: <span class="fortempno">30</span</p>
-                  <p class="humidty">humidty: <span class="forhumidityno">80%</span</p>
-                  
-                </div>
-              </div>
-              <div class="card" style="width: 9rem;">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Date</h5>
-                  <p class="temp">Temperature: <span class="fortempno">30</span</p>
-                  <p class="humidty">humidty: <span class="forhumidityno">80%</span</p>
-                  
-                </div>
-              </div> -->
+
            </div> 
         </div>
 
@@ -197,7 +149,9 @@
 
        
         <script type="text/javascript">            
-         var coordMatrix = [];  
+         var coordMatrix = [];
+         var todayDate  
+         var flag
         
         // end - clock on the side bar 
         
@@ -210,7 +164,7 @@
             var year = d.year(); //2020
             var first_date = month_name[month] + " " + 1 + " " + year;
             //September 1 2014
-            var todayDate = d.format("ddd MMM DD YYYY");
+            todayDate = d.format("ddd MMM DD YYYY");
             //console.log(todayDate);
 
             //Mon Sep 01 2014 ...
@@ -247,28 +201,64 @@
             var windspeed;
             var cities = [];
             var weatherimagecode;
-            
+
+            cities = JSON.parse(localStorage.getItem("storedcities"));
+            displaycitylist(cities);
 
             $('.search').on('click', function(event) { 
-                console.log("yes")
                 event.preventDefault();
-                var input = $(".inputcity").val().trim()
+                var input = $(".inputcity").val().trim() 
                 console.log(input)
-                cities.push(input)
+                flag = "new"
+
                 // Here we are building the URL we need to query the database
-                weatherQuery(input,cities,todayDate)
-                weatherforecastQuery(input,cities,todayDate)
+                //location.reload();
+                weatherQuery(input,todayDate)
+                weatherforecastQuery(input,todayDate)
+                // cities = JSON.parse(localStorage.getItem("storedcities"));
+                // displaycitylist(cities);
+                })
 
-                
-            })
+        
+            $('.list-group a').on('click',  function(event)  {
 
-                // get times from moment
-                const now = moment().format('MMMM Do YYYY')
-                let nowHour24 = moment().format('H');
-                let nowHour12 = moment().format('h');
-            };
+                event.preventDefault();
+                let $this = $(this);
+                console.log($this)
+                var city = $this[0].text;
+                console.log(city)
+                $('.active').removeClass('active');
+                $this.toggleClass('active')
+                flag = "old"
+                console.log(flag)
+
+                // Pass clicked link element to another function
+
+                weatherQuery(city,todayDate)
+                weatherforecastQuery(city,todayDate)
+                // cities = JSON.parse(localStorage.getItem("storedcities"));
+                // displaycitylist(cities);
+                });
+
+
+        };
+
 
             
+            function displaycitylist(cities) {
+                //<a href="#" class="list-group-item list-group-item-action  active">Cras justo odio</a>
+                $(".citylist").empty()
+                 $.each(cities,function(key,value){ 
+                    var list = $("<a>");
+                    list.attr("href","#");
+                    list.addClass("list-group-item list-group-item-action");
+                    list.text(value);
+                    console.log(flag)
+                    $(".citylist").append(list)
+
+                 })
+            }
+
             function updateTime() {
                 const now = moment();
                 const humanReadable = now.format("hh:mm:ssa");
@@ -277,9 +267,10 @@
             setInterval(updateTime,1000);
 
 
-            function weatherQuery(city,cities,todayDate) { 
-            var APIKey = "a07df414557c7b11b6dc89a1457fd71b";
+            function weatherQuery(city,todayDate) { 
+            var APIKey = "5f3d7f957f9d33f22df8869c2edb1ea4";
             var cityCoord = {};
+            var cities =[]
             queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + APIKey;
             $.ajax({
                 url: queryURL,
@@ -287,34 +278,64 @@
                 })
                 // We store all of the retrieved data inside of an object called "response"
                 .then(function(response) {
-
-                    // Log the queryURL
-                    console.log(queryURL);
-
+                    
                     // Log the resulting object
-                    cities.push(response.name)
-                    console.log(cityCoord)
                     coordMatrix = [response.coord.lat,response.coord.lon]
                     city = response.name
+                    cities = JSON.parse(localStorage.getItem("storedcities"));
+                    console.log(cities)
+                    if (typeof cities === "undefined" || cities === null || cities.length === null || cities.length === 0) { 
+                        console.log("1")
+                        cities=[city]
+                    } else {
+                        console.log("2")
+                    }
+                    console.log(city)
+                    console.log(cities)
+                    console.log((cities.includes(city)))
+                    if ((cities.includes(city))) { 
+                        console.log("3")
+                        flag = "old"
+                        } else {
+                        cities.unshift(city);
+                        flag = "new"
+                            var list = $("<a>");
+                            list.attr("href","#");
+                            list.addClass("list-group-item list-group-item-action active");
+                            list.text(city);
+                            console.warn(flag)
+                            $(".citylist").prepend(list)
+                        console.log("4")
+                        if (cities.length>15) {
+                            cities = cities.slice(-1);
+                            console.log("5")
+                        }
+                     }
+                    localStorage.setItem("storedcities", JSON.stringify(cities));
+                    console.log(flag)
+                    
+
                     weatherimagecode = response.weather[0].icon
                     cityCoord[city] = coordMatrix;
+                    var todaywthreg = []
                     var imglink = "http://openweathermap.org/img/wn/" + weatherimagecode + "@2x.png" 
                     var img = $("<img>");
                     img.attr("src",imglink)
-                    console.log(img)
+                    //console.log(img)
                     // Transfer content to HTML
                     $(".cityname").html(response.name + " (" + todayDate + ")");
                     $(".cityname").append(img)
-                    $(".windspeedno").text(response.wind.speed);
-                    $(".humidityno").text(response.main.humidity);
-                    $(".tempno").text(response.main.temp);
+                    $(".windspeedno").text(response.wind.speed+"MPH");
+                    $(".humidityno").text(response.main.humidity+"%");
+                    $(".tempno").html(parseInt((response.main.temp-32)*5/9)+"&degC");
                     uvQuery(coordMatrix);
+                    
                 });
             };
 
-            function uvQuery(coord) { 
-            var APIKey = "a07df414557c7b11b6dc89a1457fd71b";
-            console.log(coord)
+            function uvQuery(coord) {
+            var APIKey = "5f3d7f957f9d33f22df8869c2edb1ea4";
+            //console.log(coord)
             queryURL = "https://api.openweathermap.org/data/2.5/uvi?lat=" + coord[0] + "&lon=" + coord[1] + "&appid=" + APIKey;
             $.ajax({
                 url: queryURL,
@@ -322,17 +343,8 @@
                 })
                 // We store all of the retrieved data inside of an object called "response"
                 .then(function(response) {
-                    // Log the queryURL
-                    console.log(queryURL);
-                    // Log the resulting object
-                    console.log(response);
-                    // Transfer content to HTML
+
                     $(".uvindexno").text(response.value);
-                    var uvindex = 8.23;
-                    console.log(response.value < 3)
-                    console.log(3 << response.value << 6)
-                    console.log(6 < response.value < 8)
-                    console.log(8 < response.value < 11)
 
                     if (response.value < 3) {
                         $(".uvindexno").removeClass("bg-warning bg-danger bg-success bg-violet bg-yellow")
@@ -353,9 +365,10 @@
                 });
             };
 
-            function weatherforecastQuery(city,cities,todayDate) { 
-                var APIKey = "a07df414557c7b11b6dc89a1457fd71b";
+            function weatherforecastQuery(city,todayDate) { 
+                var APIKey = "5f3d7f957f9d33f22df8869c2edb1ea4";
                 var cityCoord = {};
+
                 queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey;
                 $.ajax({
                     url: queryURL,
@@ -364,23 +377,19 @@
                     // We store all of the retrieved data inside of an object called "response"
                     .then(function(response) {
 
-                        var weatherimagecode = [] 
-                        var humidity = []
-                        var temp = []
-                        console.log(response)
+                        var weatherimagecode = [];
+                        var humidity = [];
+                        var temp = [];
+                        //console.log(response)
                         for (var i = 0; i < 5; i++) {
                             var p = i + 8;
                             temp[i]=  ((response.list[p].main.temp) - 273.15).toFixed(2)
-                            console.log(temp[i])
+                            //console.log(temp[i])
                             humidity[i]= response.list[p].main.humidity
-                            console.log(humidity[i])
+                            //console.log(humidity[i])
                             weatherimagecode[i] =response.list[p].weather[0].icon
-                            console.log(weatherimagecode[i])
+                            //console.log(weatherimagecode[i])
                             }
-                            
-                        console.log(temp)
-                        console.log(humidity)
-                        console.log(weatherimagecode)
                         updateForecast(temp,humidity,weatherimagecode)
                         // Log the queryURL
                         
@@ -389,9 +398,10 @@
 
             function updateForecast (temp,humidity,imagecode) { 
                 
-                    console.log(temp)
-                    console.log(humidity)
-                    console.log(imagecode)
+                    //console.log(temp)
+                    //console.log(humidity)
+                    //console.log(imagecode)
+                    $(".forecast").empty()
 
                 for (var i = 0; i < 5; i++) {
                     var div1 = $("<div>");
@@ -420,8 +430,8 @@
                     img.css({'width' : '3rem'})
                    
 
-                    span2.text(humidity[i]);
-                    span1.text(temp[i]);
+                    span2.html(humidity[i]+"%");
+                    span1.html(temp[i]+"&degC");
                     var date = moment().add(i , "day")
                     var dateformatted = date.format("LL")
                     h5.text(dateformatted);
@@ -431,7 +441,7 @@
                     div2.append(p1).append(p2)
                     div1.append(h5).append(img).append(div2)
                     div1.css({'width': '9rem'})
-
+                    
                     $(".forecast").append(div1)
                     
                 };
