@@ -284,39 +284,61 @@
                     city = response.name
                     cities = JSON.parse(localStorage.getItem("storedcities"));
                     console.log(cities)
+                    
+
                     if (typeof cities === "undefined" || cities === null || cities.length === null || cities.length === 0) { 
                         console.log("1")
-                        cities=[city]
+                        cities=[city];
+                        flag = "new"
+                        var list = $("<a>");
+                        list.attr("href","#");
+                        list.addClass("list-group-item list-group-item-action");
+                        $('.active').removeClass('active');
+                        list.toggleClass('active')
+                        list.text(city);
+                        console.warn(flag)
+                        $(".citylist").prepend(list)
                     } else {
                         console.log("2")
                     }
+
                     console.log(city)
-                    console.log(cities)
-                    console.log((cities.includes(city)))
                     if ((cities.includes(city))) { 
                         console.log("3")
                         flag = "old"
                         } else {
-                        cities.unshift(city);
-                        flag = "new"
+                            cities.unshift(city);
+                            flag = "new"
                             var list = $("<a>");
                             list.attr("href","#");
-                            list.addClass("list-group-item list-group-item-action active");
+                            list.addClass("list-group-item list-group-item-action");
+                            $('.active').removeClass('active');
+                            list.toggleClass('active')
                             list.text(city);
                             console.warn(flag)
                             $(".citylist").prepend(list)
-                        console.log("4")
+                            console.log("4")
                         if (cities.length>15) {
                             cities = cities.slice(-1);
                             console.log("5")
                         }
                      }
+                    
+                    
+                    
+                    
+
+                    console.log(city)
+                    console.log(cities)
+                    console.log((cities.includes(city)))
+
                     localStorage.setItem("storedcities", JSON.stringify(cities));
                     console.log(flag)
                     
 
                     weatherimagecode = response.weather[0].icon
                     cityCoord[city] = coordMatrix;
+                    city = ""
                     var todaywthreg = []
                     var imglink = "http://openweathermap.org/img/wn/" + weatherimagecode + "@2x.png" 
                     var img = $("<img>");
