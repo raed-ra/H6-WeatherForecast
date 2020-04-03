@@ -3,6 +3,8 @@ Daily planner
 https://raed-ra.github.io/Homework-6/
 # Homework-6
 
-Everything works except that I couldn't get one thing, see note below:
-
-Note: for the left side list of locations to work to choose from previously entered locations, you need to refresh the page first.
+Everything works.
+Error message will be generated if name of city is not entered correctly.
+The active city will be shown as blue color all the time.
+The search box will be submitted by enter as well as button.
+The search box will be cleared upon successful search.
