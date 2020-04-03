@@ -93,36 +93,22 @@
             <!-- Start - clock on the side bar -->
             
             <p class="border border-light h-30 bg-light font-weight-bold ">Search for a city:</p>
-            <!-- slkjhsalhdslaD QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ-->
-            <div class="input-group mb-3">
-                <input type="text" class="form-control inputcity" placeholder="City" aria-label="City name" aria-describedby="basic-addon2">
+            <form class="input-group mb-3">
+                <input type="text" class="form-control inputcity" placeholder="City" aria-label="Search" aria-describedby="basic-addon2">
                 <div class="input-group-append">
-                  <button class="btn btn-outline-secondary search" type="button">Search</button>
+                  <input class="btn btn-outline-secondary search" type="submit" value="Search"></input>
                 </div>
-            </div>
-                <!-- <a href="#" class="list-group-item list-group-item-action  active">Cras justo odio</a>
-                <a href="#" class="list-group-item list-group-item-action city">Dapibus ac facilisis in</a>
-                <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
-                <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
-                <a href="#" class="list-group-item list-group-item-action disabled">Vestibulum at eros</a> -->
+            </form>
+            <div class="error-message"></div>
             <div class="list-group citylist"></div>
-
             <div class="border border-secondary h-30 rounded text-center mt-4 clock"></div>
             <div class="border border-secondary h-30 rounded text-center date" id="date"></div>
-            <!-- <div class="border border-secondary h-30 rounded text-center date" id="calendar-container">
-                    <div id="calendar-header">
-                        <span id="calendar-month-year"></span>
-                    </div>
-                    <div id="calendar-dates"></div>
-            </div> -->
+
             <p class=""></p>
             <p class=""></p>
             <p class=""></p>
         </nav>
-<!--Side left Navbar End-->
-
-
-        <div class="col-12 col-md-9"> <!--Planner Header start-->
+      <div class="col-12 col-md-9"> <!--Planner Header start-->
             <div class="jumbotron">
                 <h1 class="display-4 cityname">city</h1>
                 <hr class="my-4">
@@ -134,407 +120,12 @@
                   <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
                 </p> -->
               </div>
-            </header> <!--Planner Header end-->
-
-            
+            </header> <!--Planner Header end--> 
            <div class="row forecast justify-content-around">
-
            </div> 
         </div>
+        <!-- Event planner Main -->    
 
-        <!-- Event planner Main -->
-
-            
-
-
-       
-        <script type="text/javascript">            
-         var coordMatrix = [];
-         var todayDate  
-         var flag
-        
-        // end - clock on the side bar 
-        
-        window.onload = function(){
-        //$(document).ready(function() { 
-            var d = moment();
-            var date = d.format("MMMM Do YYYY");
-            var month_name = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-            var month = d.month();   //0-11
-            var year = d.year(); //2020
-            var first_date = month_name[month] + " " + 1 + " " + year;
-            //September 1 2014
-            todayDate = d.format("ddd MMM DD YYYY");
-            //console.log(todayDate);
-
-            //Mon Sep 01 2014 ...
-            var first_day = todayDate.substring(0, 3);    //Mon
-            //console.log(first_day)
-            var day_name = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-            var day_no = day_name.indexOf(first_day);   //gives the index of current day in the array 
-            var days = d.daysInMonth();    //number of days in the current month i.e. 30
-            var todayOfmonth = d.format("DD");
-            var firstdayOfmonth = day_name.indexOf(d.startOf("month").format("ddd"))
-            let dayOfmonth = null
-            dayOfmonth = JSON.parse(localStorage.getItem("plannerDate"));
-                if (dayOfmonth==null) {
-                    dayOfmonth = todayOfmonth;
-                }
-            var calendar = get_calendar(firstdayOfmonth, days, todayOfmonth, dayOfmonth);
-            let storedPlans = new Array(9).fill(null)
-            let actionRegister = new Array(9).fill(null)
-            console.log(days)
-            let actionRegisterObj = new Array(days).fill(Array(9).fill(null))
-            let storedPlansObj = new Array(days).fill(Array(9).fill(null))
-
-            $('#calendar-month-year').text(month_name[month]+" "+year);
-            $('#calendar-dates').append(calendar);
-            $('.date').append(date);
-            // Navbar End
-
-            var queryURL;
-            var weatherObj;
-            var city;
-            var temp;
-            var humidity;
-            var unindex;
-            var windspeed;
-            var cities = [];
-            var weatherimagecode;
-
-            cities = JSON.parse(localStorage.getItem("storedcities"));
-            displaycitylist(cities);
-
-            $('.search').on('click', function(event) { 
-                event.preventDefault();
-                var input = $(".inputcity").val().trim() 
-                console.log(input)
-                flag = "new"
-
-                // Here we are building the URL we need to query the database
-                //location.reload();
-                weatherQuery(input,todayDate)
-                weatherforecastQuery(input,todayDate)
-                // cities = JSON.parse(localStorage.getItem("storedcities"));
-                // displaycitylist(cities);
-                })
-
-        
-            $('.list-group a').on('click',  function(event)  {
-
-                event.preventDefault();
-                let $this = $(this);
-                console.log($this)
-                var city = $this[0].text;
-                console.log(city)
-                $('.active').removeClass('active');
-                $this.toggleClass('active')
-                flag = "old"
-                console.log(flag)
-
-                // Pass clicked link element to another function
-
-                weatherQuery(city,todayDate)
-                weatherforecastQuery(city,todayDate)
-                // cities = JSON.parse(localStorage.getItem("storedcities"));
-                // displaycitylist(cities);
-                });
-
-
-        };
-
-
-            
-            function displaycitylist(cities) {
-                //<a href="#" class="list-group-item list-group-item-action  active">Cras justo odio</a>
-                $(".citylist").empty()
-                 $.each(cities,function(key,value){ 
-                    var list = $("<a>");
-                    list.attr("href","#");
-                    list.addClass("list-group-item list-group-item-action");
-                    list.text(value);
-                    console.log(flag)
-                    $(".citylist").append(list)
-
-                 })
-            }
-
-            function updateTime() {
-                const now = moment();
-                const humanReadable = now.format("hh:mm:ssa");
-                $('.clock').text(humanReadable);
-            };
-            setInterval(updateTime,1000);
-
-
-            function weatherQuery(city,todayDate) { 
-            var APIKey = "5f3d7f957f9d33f22df8869c2edb1ea4";
-            var cityCoord = {};
-            var cities =[]
-            queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + APIKey;
-            $.ajax({
-                url: queryURL,
-                method: "GET"
-                })
-                // We store all of the retrieved data inside of an object called "response"
-                .then(function(response) {
-                    
-                    // Log the resulting object
-                    coordMatrix = [response.coord.lat,response.coord.lon]
-                    city = response.name
-                    cities = JSON.parse(localStorage.getItem("storedcities"));
-                    console.log(cities)
-                    
-
-                    if (typeof cities === "undefined" || cities === null || cities.length === null || cities.length === 0) { 
-                        console.log("1")
-                        cities=[city];
-                        flag = "new"
-                        var list = $("<a>");
-                        list.attr("href","#");
-                        list.addClass("list-group-item list-group-item-action");
-                        $('.active').removeClass('active');
-                        list.toggleClass('active')
-                        list.text(city);
-                        console.warn(flag)
-                        $(".citylist").prepend(list)
-                    } else {
-                        console.log("2")
-                    }
-
-                    console.log(city)
-                    if ((cities.includes(city))) { 
-                        console.log("3")
-                        flag = "old"
-                        } else {
-                            cities.unshift(city);
-                            flag = "new"
-                            var list = $("<a>");
-                            list.attr("href","#");
-                            list.addClass("list-group-item list-group-item-action");
-                            $('.active').removeClass('active');
-                            list.toggleClass('active')
-                            list.text(city);
-                            console.warn(flag)
-                            $(".citylist").prepend(list)
-                            console.log("4")
-                        if (cities.length>15) {
-                            cities = cities.slice(-1);
-                            console.log("5")
-                        }
-                     }
-                    
-                    
-                    
-                    
-
-                    console.log(city)
-                    console.log(cities)
-                    console.log((cities.includes(city)))
-
-                    localStorage.setItem("storedcities", JSON.stringify(cities));
-                    console.log(flag)
-                    
-
-                    weatherimagecode = response.weather[0].icon
-                    cityCoord[city] = coordMatrix;
-                    city = ""
-                    var todaywthreg = []
-                    var imglink = "http://openweathermap.org/img/wn/" + weatherimagecode + "@2x.png" 
-                    var img = $("<img>");
-                    img.attr("src",imglink)
-                    //console.log(img)
-                    // Transfer content to HTML
-                    $(".cityname").html(response.name + " (" + todayDate + ")");
-                    $(".cityname").append(img)
-                    $(".windspeedno").text(response.wind.speed+"MPH");
-                    $(".humidityno").text(response.main.humidity+"%");
-                    $(".tempno").html(parseInt((response.main.temp-32)*5/9)+"&degC");
-                    uvQuery(coordMatrix);
-                    
-                });
-            };
-
-            function uvQuery(coord) {
-            var APIKey = "5f3d7f957f9d33f22df8869c2edb1ea4";
-            //console.log(coord)
-            queryURL = "https://api.openweathermap.org/data/2.5/uvi?lat=" + coord[0] + "&lon=" + coord[1] + "&appid=" + APIKey;
-            $.ajax({
-                url: queryURL,
-                method: "GET"
-                })
-                // We store all of the retrieved data inside of an object called "response"
-                .then(function(response) {
-
-                    $(".uvindexno").text(response.value);
-
-                    if (response.value < 3) {
-                        $(".uvindexno").removeClass("bg-warning bg-danger bg-success bg-violet bg-yellow")
-                        $(".uvindexno").addClass("bg-success")
-                    } else if ( 3 <= response.value && response.value < 6) {
-                        $(".uvindexno").removeClass("bg-warning bg-danger bg-success bg-violet bg-yellow")
-                        $(".uvindexno").addClass("bg-yellow")
-                    } else if (6 <= response.value && response.value < 8) {
-                        $(".uvindexno").removeClass("bg-warning bg-danger bg-success bg-violet bg-yellow")
-                        $(".uvindexno").addClass("bg-warning")
-                    } else if (8 <= response.value && response.value < 11 ) {
-                        $(".uvindexno").removeClass("bg-warning bg-danger bg-success bg-violet bg-yellow")
-                        $(".uvindexno").addClass("bg-danger")
-                    } else {
-                        $(".uvindexno").removeClass("bg-warning bg-danger bg-success bg-violet bg-yellow")
-                        $(".uvindexno").addClass("bg-violet") 
-                    }
-                });
-            };
-
-            function weatherforecastQuery(city,todayDate) { 
-                var APIKey = "5f3d7f957f9d33f22df8869c2edb1ea4";
-                var cityCoord = {};
-
-                queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey;
-                $.ajax({
-                    url: queryURL,
-                    method: "GET"
-                    })
-                    // We store all of the retrieved data inside of an object called "response"
-                    .then(function(response) {
-
-                        var weatherimagecode = [];
-                        var humidity = [];
-                        var temp = [];
-                        //console.log(response)
-                        for (var i = 0; i < 5; i++) {
-                            var p = i + 8;
-                            temp[i]=  ((response.list[p].main.temp) - 273.15).toFixed(2)
-                            //console.log(temp[i])
-                            humidity[i]= response.list[p].main.humidity
-                            //console.log(humidity[i])
-                            weatherimagecode[i] =response.list[p].weather[0].icon
-                            //console.log(weatherimagecode[i])
-                            }
-                        updateForecast(temp,humidity,weatherimagecode)
-                        // Log the queryURL
-                        
-                });
-            };
-
-            function updateForecast (temp,humidity,imagecode) { 
-                
-                    //console.log(temp)
-                    //console.log(humidity)
-                    //console.log(imagecode)
-                    $(".forecast").empty()
-
-                for (var i = 0; i < 5; i++) {
-                    var div1 = $("<div>");
-                    var div2 = $("<div>");
-                    var span1 =$("<span>");
-                    var p1 = $("<p>");
-                    var span2 =$("<span>");
-                    var p2 = $("<p>");
-                    var img = $("<img>");
-                    var h5 = $("<h5>");
-                    
-                    var imglink = "http://openweathermap.org/img/wn/" + imagecode[i] + "@2x.png"
-                    
-                    
-                    span2.addClass("forhumidityno");
-                    p2.addClass("humidity");
-                    span1.addClass("fortempno");
-                    p1.addClass("temp");
-                    h5.addClass("card-title");
-                    div2.addClass("card-body");
-                    img.addClass("card-img-top");
-                    div1.addClass("card bg-primary text-white");
-
-                    img.attr("src", imglink)
-                    img.attr("alt" , "weather image cap")
-                    img.css({'width' : '3rem'})
-                   
-
-                    span2.html(humidity[i]+"%");
-                    span1.html(temp[i]+"&degC");
-                    var date = moment().add(i , "day")
-                    var dateformatted = date.format("LL")
-                    h5.text(dateformatted);
-                  
-                    p2.append(span2)
-                    p1.append(span1)
-                    div2.append(p1).append(p2)
-                    div1.append(h5).append(img).append(div2)
-                    div1.css({'width': '9rem'})
-                    
-                    $(".forecast").append(div1)
-                    
-                };
-            };
-
-            //Build Calender Function
-            function get_calendar(day_no, days, todayOfmonth, dayOfmonth){
-            var table = $('<table>');
-            var tr = $('<tr>');
-            //Row for the day letters
-            for(var c=0; c<=6; c++){
-                var td = $("<td>");
-             
-                td.text("SMTWTFS"[c]);
-                tr.append(td);
-                //console.log(tr)
-            }
-            table.append(tr);
-            //console.log(table)
-            
-            //create 2nd row
-            tr = $('<tr>');
-            var c;
-            for(c=0; c<=6; c++){
-                if(c == day_no){
-                    break;
-                }
-                var td = $('<td>');
-                td.text("");
-                tr.append(td);
-            }
-        
-            var count = 1;
-            for(c=day_no; c<=6; c++){
-                var td = $('<td>');
-                td.text(count);
-                if (count==todayOfmonth){
-                    td.addClass("text-primary")
-                }
-                if (count==dayOfmonth){
-                        td.addClass("bg-warning rounded-circle")
-                } 
-                count++;
-                tr.append(td);
-            }
-            table.append(tr);
-            
-            //rest of the date rows
-            for(var r=3; r<=7; r++){
-                tr = $('<tr>');
-                for(var c=0; c<=6; c++){
-                    if(count > days){
-                        table.append(tr);
-                        return table;
-                    }
-                    td = $('<td>');
-                    td.text(count);
-                    if (count==todayOfmonth){
-                        td.addClass("text-primary")
-                    }
-                    if (count==dayOfmonth){
-                        td.addClass("bg-warning rounded-circle")
-                    }          
-                    count++;
-                    tr.append(td);
-                }
-                table.append(tr);
-            }
-            return table;
-         }
-          </script>
         </main>
     </div>
 </div>
@@ -552,12 +143,20 @@
         </div>  <!--Portfolio footer end--> 
     </div>
   </footer>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
-  <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
-  <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>  
+  <script src="/index.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+  <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
+  
+  <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> -->
+  
     
     
 </body>
