@@ -1,3 +1,5 @@
+
+
 var coordMatrix = [];
         var todayDate  
         var d = moment();
@@ -64,6 +66,7 @@ var coordMatrix = [];
             weatherQuery(city,todayDate,cities)
             weatherforecastQuery(city,todayDate)
             };
+
 
         //this function displays the history list on the side everytime there is a city added 
         // this function also identifies and refreshes which city is active - blue color 
