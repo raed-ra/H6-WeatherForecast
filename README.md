@@ -1,6 +1,6 @@
 # Homework-6
 Daily planner
-https://raed-ra.github.io/Homework-6/
+ https://raed-ra.github.io/H6-WeatherForecast/
 # Homework-6
 
 Everything works.
