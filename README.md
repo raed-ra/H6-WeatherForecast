@@ -38,7 +38,7 @@ The application appears as above. Type in city name in input box then click sear
 ## License
 MIT License
 
-Copyright (c) [2020] [Caroline Bates]
+Copyright (c) [2020] [Raed R]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
